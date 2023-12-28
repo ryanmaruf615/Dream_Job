@@ -10,14 +10,15 @@ import { format } from 'date-fns';
 
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
+import axios from "axios";
 
 const CreateProvider = () => {
     const [name, setName] = useState("");
     const [address, setAddress] = useState("");
+    const [rule, setRule] = useState("");
     const [role, setRole] = useState("");
     const [phone, setPhone] = useState("");
     const [email, setEmail] = useState("");
-    const [rule, setRule] = useState("");
     const [contactName, setContactName] = useState("");
     const [masterAgreementType, setMasterAgreementType] = useState("");
     const [existSince, setExistSince] = useState(new Date());
@@ -28,10 +29,62 @@ const CreateProvider = () => {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        console.log(validUntil);
-        alert(validUntil);
 
+        // Create an object with the form data
+        const formData = {
+            name:name,
+            address:address,
+            phone:phone,
+            rule:rule,
+            role:role,
+            email:email,
+            contactName:contactName,
+            masterAgreementType:masterAgreementType,
+            existSince:existSince,
+            validFrom:validFrom,
+            validUntil:validUntil,
+        };
+
+        // Set loading to true to indicate that the request is being sent
+        setLoading(true);
+
+        try {
+            // Send a POST request using Axios
+            const response = await axios.post('http://35.174.107.106:3000/provider/create', formData, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            // Handle the response here (you can log it or perform other actions)
+            console.log(response.data);
+
+            // Reset the form and loading state after successful submission
+            setName('');
+            setAddress('');
+            setRole('');
+            setPhone('');
+            setEmail('');
+            setRule('');
+            setContactName('');
+            setMasterAgreementType('');
+            setExistSince(new Date());
+            setValidFrom(new Date());
+            setValidUntil(new Date());
+        } catch (error) {
+            // Handle errors here (e.g., show an error message)
+            console.error('Error submitting form:', error);
+        } finally {
+            // Set loading back to false, whether the request was successful or not
+            setLoading(false);
+        }
     }
+
+    const formatDate = (existSince) => {
+        const dateObject = new Date(existSince);
+        const setExistSince = existSince.toISOString().split('T')[0];
+        return existSince;
+    };
 
 
         return (
@@ -63,12 +116,31 @@ const CreateProvider = () => {
                             value={phone}
                             onChange={(e) => setPhone(e.target.value)}
                         /><br/>
-                        <TextInput
-                            type="text"
-                            placeholder="Contact Person Name "
-                            value={contactName}
-                            onChange={(e) => setContactName(e.target.value)}
-                        />
+
+
+                        <Row className="mt-2 mb-3">
+                            <Col>
+                                <TextInput
+                                    type="text"
+                                    placeholder="Contact Person Name "
+                                    value={contactName}
+                                    onChange={(e) => setContactName(e.target.value)}
+                                />
+                            </Col>
+                            <Col>
+                                <TextInput
+                                    type="text"
+                                    placeholder="Rule "
+                                    value={rule}
+                                    onChange={(e) => setRule(e.target.value)}
+                                />
+                            </Col>
+
+                        </Row>
+
+
+
+
                         <Row className="mt-2 mb-3">
                             <Col>
                                 <TextInput

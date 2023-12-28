@@ -3,7 +3,7 @@ import classes from "../styles/Post.module.css";
 
 
 
-export default function Post({title, id, validFrom, validUntil,teamMember}){
+export default function Post({title, id, validFrom, validUntil,skill}){
 
     return(
         <div className={classes.post}>
@@ -12,9 +12,9 @@ export default function Post({title, id, validFrom, validUntil,teamMember}){
                 <p className="text-center">{title}</p>
             </div>
             <div className={classes.qmeta}>
-                <p>Team Member : {teamMember} </p>
-                <p>valid form {validFrom}</p>
-                <p>valid Until {validUntil}</p>
+                <p>Skill : {skill} </p>
+                <p>Valid form {validFrom}</p>
+                <p>Valid Until {validUntil}</p>
             </div>
         </div>
 

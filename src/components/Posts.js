@@ -16,8 +16,9 @@ export default function Posts(){
                     <Post
                         title={post.title}
                         id={post.id}
-                        validFrom={post.validFrom}
-                        validUntil={post.validUntil}
+                        validFrom={post.jobStartDate}
+                        validUntil={post.jobEndDate}
+                        skill={post.skill}
                     />
                 </Link>
                 ))}
