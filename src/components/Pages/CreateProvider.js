@@ -115,9 +115,7 @@ const CreateProvider = () => {
                             placeholder="Provider Phone"
                             value={phone}
                             onChange={(e) => setPhone(e.target.value)}
-                        /><br/>
-
-
+                        />
                         <Row className="mt-2 mb-3">
                             <Col>
                                 <TextInput
@@ -137,9 +135,6 @@ const CreateProvider = () => {
                             </Col>
 
                         </Row>
-
-
-
 
                         <Row className="mt-2 mb-3">
                             <Col>
@@ -186,9 +181,7 @@ const CreateProvider = () => {
                                     selected={validUntil}
                                     onChange={(date) => setValidUntil(date)}/><br/>
                             </Col>
-
                         </Row>
-
                         <Col md={{span: 4, offset: 4}}>
                             <Button disabled={loading} type="submit">Submit Now</Button>
                         </Col>
