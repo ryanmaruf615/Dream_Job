@@ -8,6 +8,8 @@ import DateTimePicker from "../DateTimePicker";
 import DatePicker from "react-datepicker";
 import TextArea from "../TextArea";
 import axios from "axios";
+import SuccessMessage from "../SuccessMessage";
+import ErrorMessage from '../ErrorMessage';
 
 
 const CreateMasterAgreementForm = () => {
@@ -24,7 +26,7 @@ const CreateMasterAgreementForm = () => {
     const [skill, setSkill] = useState('');
     const [salary, setSalary] = useState('');
     const [description, setDescription] = useState('');
-    const [loading,setLoading] = useState();
+    const [loading,setLoading] = useState(false);
 
     //Date picker States
     const [jobStartDate, setJobStartDate] = useState(new Date());
@@ -76,7 +78,7 @@ const CreateMasterAgreementForm = () => {
                 },
             });
 
-            // Handle the response here (you can log it or perform other actions)
+            SuccessMessage({ title: 'Saved successfully' });
             console.log(response.data);
 
             // Reset the form and loading state after successful submission
@@ -97,7 +99,7 @@ const CreateMasterAgreementForm = () => {
             setStartContractDate(new Date());
             setEndContractDate(new Date());
         } catch (error) {
-            // Handle errors here (e.g., show an error message)
+            ErrorMessage();
             console.error('Error submitting form:', error);
         } finally {
             // Set loading back to false, whether the request was successful or not

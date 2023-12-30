@@ -4,12 +4,18 @@ import TextInput from '../TextInput';
 import classes from '../../styles/Signup.module.css';
 import { Form } from 'react-bootstrap';
 import Button from '../Button';
+import SuccessMessage from '../SuccessMessage';
+import ErrorMessage from '../ErrorMessage';
+
+
 
 const MaterialGroupForm = () => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState();
     const [loading, setLoading] = useState(false);
+
+
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -34,8 +40,7 @@ const MaterialGroupForm = () => {
 
             // Handle the response here (you can log it or perform other actions)
             console.log(response.data);
-
-
+            SuccessMessage({ title: 'Saved successfully' });
 
             // Reset the form and loading state after successful submission
             setName('');
@@ -43,7 +48,9 @@ const MaterialGroupForm = () => {
             setPrice('');
         } catch (error) {
             // Handle errors here (e.g., show an error message)
+            ErrorMessage();
             console.error('Error submitting form:', error);
+
         } finally {
             // Set loading back to false, whether the request was successful or not
             setLoading(false);

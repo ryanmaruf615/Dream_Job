@@ -4,13 +4,12 @@ import classes from '../../styles/Signup.module.css';
 import {Col, Form, Row} from "react-bootstrap";
 import Button from "../Button";
 import DatePicker from "react-datepicker";
-
-
 import { format } from 'date-fns';
-
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 import axios from "axios";
+import SuccessMessage from "../SuccessMessage";
+import ErrorMessage from '../ErrorMessage';
 
 const CreateProvider = () => {
     const [name, setName] = useState("");
@@ -24,7 +23,7 @@ const CreateProvider = () => {
     const [existSince, setExistSince] = useState(new Date());
     const [validFrom, setValidFrom] = useState(new Date());
     const [validUntil, setValidUntil] = useState(new Date());
-    const [loading, setLoading] = useState();
+    const [loading, setLoading] = useState(false);
 
 
     async function handleSubmit(e) {
@@ -56,7 +55,7 @@ const CreateProvider = () => {
                 },
             });
 
-            // Handle the response here (you can log it or perform other actions)
+            SuccessMessage({ title: 'Saved successfully' });
             console.log(response.data);
 
             // Reset the form and loading state after successful submission
@@ -72,7 +71,7 @@ const CreateProvider = () => {
             setValidFrom(new Date());
             setValidUntil(new Date());
         } catch (error) {
-            // Handle errors here (e.g., show an error message)
+            ErrorMessage();
             console.error('Error submitting form:', error);
         } finally {
             // Set loading back to false, whether the request was successful or not
