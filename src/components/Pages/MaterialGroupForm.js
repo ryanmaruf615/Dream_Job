@@ -6,6 +6,7 @@ import { Form } from 'react-bootstrap';
 import Button from '../Button';
 import SuccessMessage from '../SuccessMessage';
 import ErrorMessage from '../ErrorMessage';
+import Loading from "../Loading";
 
 
 
@@ -64,6 +65,7 @@ const MaterialGroupForm = () => {
                 <Form className={classes.signup} onSubmit={handleSubmit}>
                     <TextInput
                         type="text"
+                        required
                         placeholder="Material name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
@@ -71,6 +73,7 @@ const MaterialGroupForm = () => {
                     <br />
                     <TextInput
                         type="text"
+                        required
                         placeholder="Material Description"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
@@ -78,6 +81,7 @@ const MaterialGroupForm = () => {
                     <br />
                     <TextInput
                         type="number"
+                        required
                         placeholder="Material price"
                         value={price}
                         onChange={(e) => setPrice(e.target.value)}
@@ -86,6 +90,7 @@ const MaterialGroupForm = () => {
                     <Button disabled={loading} type="submit">
                         Submit Now
                     </Button>
+                    {loading &&(<div ><Loading type="spokes" color="#00f7ff" height={'20%'} width={'20%'}/> </div>)}
                 </Form>
             </div>
         </>

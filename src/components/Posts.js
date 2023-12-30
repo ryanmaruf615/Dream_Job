@@ -3,6 +3,7 @@ import Post from "./Post";
 import {Link} from "react-router-dom";
 import useGetAgreement from "../hooks/useGetAgreement";
 import {da} from "date-fns/locale";
+import Loading from "./Loading";
 
 
 
@@ -24,6 +25,7 @@ export default function Posts(){
                     />
                 </Link>
                 ))}
+            {loading && agreementData.length === 0 &&(<div ><Loading type="spokes" color="#00f7ff"/> </div>)}
             {!loading && agreementData.length === 0 && (<div >No Data Found ! </div>)}
             {error && (<div >There was an Error ! </div>)}
 

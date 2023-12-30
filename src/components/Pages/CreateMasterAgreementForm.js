@@ -10,6 +10,7 @@ import TextArea from "../TextArea";
 import axios from "axios";
 import SuccessMessage from "../SuccessMessage";
 import ErrorMessage from '../ErrorMessage';
+import Loading from "../Loading";
 
 
 const CreateMasterAgreementForm = () => {
@@ -33,6 +34,7 @@ const CreateMasterAgreementForm = () => {
     const [jobEndDate, setEndDate] = useState(new Date());
     const [startContractDate, setStartContractDate] = useState(new Date());
     const [endContractDate, setEndContractDate] = useState(new Date());
+    const today = new Date();
 
     // values for the select box
     const selectOptions = [
@@ -69,7 +71,6 @@ const CreateMasterAgreementForm = () => {
 
         // Set loading to true to indicate that the request is being sent
         setLoading(true);
-
         try {
             // Send a POST request using Axios
             const response = await axios.post('http://35.174.107.106:3000/agreement', formData, {
@@ -238,31 +239,36 @@ const CreateMasterAgreementForm = () => {
                          <DatePicker
                          selected={jobStartDate}
                          onChange={(date) => setJobStartDate(date)}
+                         minDate={today}
                          />
                      </Col>
                      <Col>
                          <h6>Job End Date</h6>
                          <DatePicker
                              selected={jobEndDate}
-                             onChange={(date) => setEndDate(date)}/>
+                             onChange={(date) => setEndDate(date)}
+                             minDate={today}
+                         />
                      </Col>
                  </Row>
-
-
-
+                 {loading &&(<div ><Loading type="spokes" color="#00f7ff"/> </div>)}
                  <Row>
                      <Col>
                          <h6>Contract Start Date</h6>
                          <DatePicker
                              selected={startContractDate}
                              value={startContractDate}
-                             onChange={(date) => setStartContractDate(date)}/>
+                             onChange={(date) => setStartContractDate(date)}
+                             minDate={today}
+                         />
                      </Col>
                      <Col>
                          <h6>Contract End Date</h6>
                          <DatePicker
                              selected={endContractDate}
-                             onChange={(endContractDate) => setEndContractDate(endContractDate)} />
+                             onChange={(endContractDate) => setEndContractDate(endContractDate)}
+                             minDate={today}
+                         />
                      </Col>
                  </Row>
                  <br/>
@@ -274,6 +280,7 @@ const CreateMasterAgreementForm = () => {
                  </Row>
 
                 </Form>
+
         </Container>
         </>
     );
