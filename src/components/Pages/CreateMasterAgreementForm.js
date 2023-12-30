@@ -19,6 +19,7 @@ const CreateMasterAgreementForm = () => {
     const [providerEmail, setProviderEmail] = useState('');
     const [technologyLevel, setTechnologyLevel] = useState('');
     const [role, setRole] = useState('');
+    const [team, setTeam] = useState('');
 
     const [skill, setSkill] = useState('');
     const [salary, setSalary] = useState('');
@@ -34,9 +35,9 @@ const CreateMasterAgreementForm = () => {
     // values for the select box
     const selectOptions = [
 
-        { value: '1', label: 'Networking Hardware' },
-        { value: '2', label: 'Computer Hardware' },
-        { value: '3', label: 'Software' },
+        { value: 'Networking Hardware', label: 'Networking Hardware' },
+        { value: 'Computer Hardware', label: 'Computer Hardware' },
+        { value: 'Software', label: 'Software' },
     ];
 
 
@@ -55,7 +56,8 @@ const CreateMasterAgreementForm = () => {
             technologyLevel:technologyLevel,
             role:role,
             skill:skill,
-            // selectedValue,
+            teamMember:team,
+            materialGroup:selectedValue,
             cycle:"1", //have to remove
             jobStartDate:jobStartDate,
             jobEndDate:jobEndDate,
@@ -85,6 +87,8 @@ const CreateMasterAgreementForm = () => {
             setProviderEmail('');
             setTechnologyLevel('');
             setRole('');
+            setTeam('');
+            setSelectedValue('');
             setDescription('');
             setSelectedValue('');
             setSalary('');
@@ -108,18 +112,21 @@ const CreateMasterAgreementForm = () => {
              <Form className = {classes.signup} onSubmit={handleSubmit}>
                  <Row className="mb-2">
                      <Col>
-                         <TextInput
-                             type="text"
-                             placeholder="Enter Job Title"
-                             icon=""
-                             value={title}
-                             onChange={(e)=> setJobTitle(e.target.value)}
-                         />
+                             <TextInput
+                                 required
+                                 type="text"
+                                 placeholder="Enter Job Title"
+                                 icon=""
+                                 value={title}
+                                 onChange={(e)=> setJobTitle(e.target.value)}
+                             />
                      </Col>
                  </Row>
                  <Row className="mb-2">
                      <Col>
                          <TextInput
+                             required
+                             label="Enter the description "
                              type="text"
                              placeholder="Enter Job Position"
                              value={position}
@@ -128,6 +135,7 @@ const CreateMasterAgreementForm = () => {
                      </Col>
                      <Col>
                          <TextInput
+                             required
                              type="text"
                              placeholder="Enter Skill Level"
                              value={skill}
@@ -141,6 +149,7 @@ const CreateMasterAgreementForm = () => {
                          <TextInput
                              type="text"
                              placeholder="Enter Provider Name"
+                             required
                              value={providerName}
                              onChange={(e)=> setProviderName(e.target.value)}
                          />
@@ -149,6 +158,7 @@ const CreateMasterAgreementForm = () => {
                          <TextInput
                              type="email"
                              placeholder="Enter Provider Email"
+                             required
                              value={providerEmail}
                              onChange={(e)=> setProviderEmail(e.target.value)}
                          />
@@ -161,6 +171,7 @@ const CreateMasterAgreementForm = () => {
                      <Col>
                          <TextInput
                              type="text"
+                             required
                              placeholder="Enter Job Technology Level"
                              value={technologyLevel}
                              onChange={(e)=> setTechnologyLevel(e.target.value)}
@@ -169,6 +180,7 @@ const CreateMasterAgreementForm = () => {
                      <Col>
                          <TextInput
                              type="text"
+                             required
                              placeholder="Enter Role"
                              value={role}
                              onChange={(e)=> setRole(e.target.value)}
@@ -177,9 +189,10 @@ const CreateMasterAgreementForm = () => {
                  </Row>
 
 
-                 <FloatingLabel controlId="floatingTextarea2" label="Enter the description " className="mb-3">
+                 <FloatingLabel controlId="floatingTextarea2" label="Job Description " className="mb-3">
                      <Form.Control
                          as="textarea"
+                         required
                          type="text"
                          value={description}
                          style={{ height: '100px' }}
@@ -188,20 +201,31 @@ const CreateMasterAgreementForm = () => {
                  </FloatingLabel>
 
                  <Row className="mb-2">
-                     {/*<Col>*/}
-                     {/*    <SelectBox*/}
-                     {/*    onChange={(e)=>{setSelectedValue(e.target.value)}}*/}
-                     {/*    options={selectOptions}*/}
-                     {/*    value={selectedValue}*/}
-                     {/*/>*/}
-                     {/*</Col>*/}
+                     <Col>
+                         <SelectBox
+                             required
+                         onChange={(e)=>{setSelectedValue(e.target.value)}}
+                         options={selectOptions}
+                         value={selectedValue}
+                     />
+                     </Col>
                      <Col>
                          <TextInput
+                             required
                              type="number"
                              placeholder="Enter Salary "
                              icon="euro"
                              value={salary}
                              onChange={(e)=> setSalary(e.target.value)}
+                         />
+                     </Col>
+                     <Col>
+                         <TextInput
+                             required
+                             type="number"
+                             placeholder="Enter Teamember"
+                             value={team}
+                             onChange={(e)=> setTeam(e.target.value)}
                          />
                      </Col>
                  </Row>

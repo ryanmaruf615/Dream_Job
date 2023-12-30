@@ -2,6 +2,7 @@ import classes from "../styles/Posts.module.css";
 import Post from "./Post";
 import {Link} from "react-router-dom";
 import useGetAgreement from "../hooks/useGetAgreement";
+import {da} from "date-fns/locale";
 
 
 
@@ -16,9 +17,10 @@ export default function Posts(){
                     <Post
                         title={post.title}
                         id={post.id}
-                        validFrom={post.jobStartDate}
-                        validUntil={post.jobEndDate}
+                        validFrom={printDate(post.jobStartDate)}
+                        validUntil={printDate(post.jobEndDate)}
                         skill={post.skill}
+                        teamMember={post.teamMember}
                     />
                 </Link>
                 ))}
@@ -27,4 +29,13 @@ export default function Posts(){
 
         </div>
     );
+}
+
+function printDate(date){
+    try{
+        return new Intl.DateTimeFormat(['ban', 'id']).format(new Date(date));
+    }
+    catch (exc){
+        return date;
+    }
 }

@@ -24,6 +24,8 @@ const PostDetails = () => {
             try {
                 const response = await axios.get(apiUrl);
                 setDataById(response.data);
+                console.log("response.data")
+                console.log(dataById)
 
             } catch (error) {
                 console.error('Error fetching agreement data:', error);
@@ -50,11 +52,11 @@ const PostDetails = () => {
                         <h2>{dataById.title}</h2>
                         <p>{dataById.description}</p>
                     <Row>
-                        <Col><p>Valid From : {dataById.validFrom}</p></Col>
-                        <Col><p>Valid Till : {dataById.validUntil}</p></Col>
-                        <Col><p>TeamDeadLine: {dataById.validUntil}</p></Col>
+                        <Col><p>Valid From : {printDate(dataById.jobStartDate)}</p></Col>
+                        <Col><p>Valid Till : {printDate(dataById.jobEndDate)}</p></Col>
+                        <Col><p>TeamDeadLine: {printDate(dataById.endContractDate)}</p></Col>
                     </Row>
-                    <p>Skills : {dataById.skills}</p>
+                    <p>Skills : {dataById.skill}</p>
                     <p>Materials: {dataById.materialGroup}</p>
 
                     <Form>
@@ -94,3 +96,12 @@ const PostDetails = () => {
 };
 
 export default PostDetails;
+
+function printDate(date){
+    try{
+        return new Intl.DateTimeFormat(['ban', 'id']).format(new Date(date));
+    }
+    catch (exc){
+        return date;
+    }
+}
