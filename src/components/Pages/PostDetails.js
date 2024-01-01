@@ -1,31 +1,38 @@
 import React, {useEffect, useState} from 'react';
 import signupImage from "../../assets/images/jobPost.png";
 import Illustration from "../Illustration";
-import {Rating} from "@smastrom/react-rating";
-import Dashboard from "../Dashboard";
 import TextInput from "../TextInput";
-import {Col, Container, Form, Row} from "react-bootstrap";
+import {Col, Container, Form, Row, Table} from "react-bootstrap";
 import useGetAgreement from "../../hooks/useGetAgreement";
-import {useParams} from "react-router-dom";
+import {Link, useHistory, useParams} from "react-router-dom";
 import axios from "axios";
 import Button from "../Button";
+import { Rating } from '@smastrom/react-rating'
+import '@smastrom/react-rating/style.css'
+import SuccessMessage from "../SuccessMessage";
+import ErrorMessage from "../ErrorMessage";
+
+
 
 const PostDetails = () => {
     const {loading,error,agreementData} = useGetAgreement()
-    const [review, setReview] = useState("");
-    const [rating, setRating] = useState({rating: 3});
-
+    const [comment, setComment] = useState("");
+    const [review, setReview] = useState(0)
     const [dataById, setDataById] = useState({});
+    const [dataBySkill, setDataBySkill] = useState([]);
     const { id } = useParams();
-    const apiUrl = `http://35.174.107.106:3000/agreement/${id}`;
+    const apiUrl = `http://35.174.107.106:3000`;
+    const history = useHistory();
+
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(apiUrl);
-                setDataById(response.data);
-                console.log("response.data")
-                console.log(dataById)
+                const response = await axios.get(apiUrl+"/agreement/"+id).then(async function (dataById) {
+                    setDataById(dataById.data);
+                    const response2 = await axios.get(apiUrl+"/agreement?skill="+dataById.data.skill);
+                    setDataBySkill(response2.data);
+                });
 
             } catch (error) {
                 console.error('Error fetching agreement data:', error);
@@ -35,14 +42,35 @@ const PostDetails = () => {
         fetchData();
     }, []);
 
-    function ratingHandle(selectedValue) {
+ async function handleSubmit(e)
+ {
+     e.preventDefault();
+     const formData = {
+         review:review, //have to remove
+         comment: comment,
+     }
+     try {
+         // Send a POST request using Axios
+         const response = await axios.post('http://35.174.107.106:3000/agreement/abir', formData, {
+             headers: {
+                 'Content-Type': 'application/json',
+             },
+         });
 
-        // alert(selectedValue)
-        setRating((rating) => ({
-            ...rating,
-            rating: selectedValue
-        }));
-    }
+         SuccessMessage({ title: 'Saved successfully' });
+         console.log(response.data);
+
+         // Reset the form and loading state after successful submission
+         setReview();
+         setComment('');
+
+     } catch (error) {
+         ErrorMessage();
+         console.error('Error submitting form:', error);
+     }
+ }
+
+
     return (
         <>
         <Container>
@@ -59,24 +87,21 @@ const PostDetails = () => {
                     <p>Skills : {dataById.skill}</p>
                     <p>Materials: {dataById.materialGroup}</p>
 
-                    <Form>
+                    <Form onSubmit={handleSubmit}>
                         <Row>
                             <Col>
-                                <Rating
-                                    style={{ maxWidth: 150 ,marginBottom: "20px" }}
-                                    onChange={ratingHandle} value={rating.rating}
-                                />
+                                <Rating style={{ maxWidth: 250 }} value={review} onChange={setReview}  />
                             </Col>
                             <Col xs={8}>
                                 <TextInput
                                     type="text"
                                     placeholder="Enter a review"
-                                    value={review}
-                                    onChange={(e)=> setReview(e.target.value)}
+                                    value={comment}
+                                    onChange={(e)=> setComment(e.target.value)}
                                 />
                             </Col>
                             <Col>
-                                <Button >Submit</Button>
+                                <Button disabled={loading} type = "submit">Submit</Button>
                             </Col>
 
                         </Row>
@@ -88,9 +113,45 @@ const PostDetails = () => {
                 </Col>
             </Row>
 
+            <div>
+                <h1 className="text-center"> Related Jobs </h1>
 
+                <Table responsive="xl">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Role</th>
+                        <th>Skills</th>
+                        <th>Technology Level</th>
+                        <th>Salary</th>
+                        <th>cycle</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {dataBySkill.map((job) => {
+
+                        return <tr key={job.id} onClick={() => {
+                            history.push("/postDetails/" + job.id);
+                            window.location.reload();
+                        }}>
+                            <td>{job.id}</td>
+                            <td>{job.title}</td>
+                            <td>{job.role}</td>
+                            <td>{job.skill}</td>
+                            <td>{job.technologyLevel}</td>
+                            <td>{job.salary}</td>
+                            <td>{job.cycle}</td>
+                        </tr>
+                    })}
+
+
+                    </tbody>
+                </Table>
+            </div>
         </Container>
-            <Dashboard/>
+
         </>
     );
 };

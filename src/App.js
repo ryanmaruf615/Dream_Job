@@ -26,7 +26,7 @@ function App() {
                   <Route exact path="/" component={Home}/>
                   <PublicRoute  exact path='/signup' component={Signup} />
                   <PublicRoute  exact path='/login' component={Login} />
-                  <PrivateRoute exact path='/dashbord' component={Dashboard} />
+                  <PrivateRoute exact path='/dashbord/:skill' component={Dashboard} />
                   <PrivateRoute exact path='/masterAgrement' component={CreateMasterAgreementForm}/>
                   <PrivateRoute exact path='/marterialGroup' component={MaterialGroupForm} />
                   <PrivateRoute exact path='/postDetails/:id' component={PostDetails} />

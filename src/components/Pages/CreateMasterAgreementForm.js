@@ -62,7 +62,7 @@ const CreateMasterAgreementForm = () => {
             skill:skill,
             teamMember:team,
             materialGroup:selectedValue,
-            cycle:"1", //have to remove
+            //cycle:"1", //have to remove
             jobStartDate:jobStartDate,
             jobEndDate:jobEndDate,
             startContractDate:startContractDate,
@@ -251,7 +251,7 @@ const CreateMasterAgreementForm = () => {
                          />
                      </Col>
                  </Row>
-                 {loading &&(<div ><Loading type="spokes" color="#00f7ff"/> </div>)}
+
                  <Row>
                      <Col>
                          <h6>Contract Start Date</h6>
@@ -262,6 +262,7 @@ const CreateMasterAgreementForm = () => {
                              minDate={today}
                          />
                      </Col>
+                         {loading &&(<Col md={{ span: 4, offset: 4 }} ><Loading type="spokes" color="#00f7ff"/> </Col>)}
                      <Col>
                          <h6>Contract End Date</h6>
                          <DatePicker
@@ -272,7 +273,9 @@ const CreateMasterAgreementForm = () => {
                      </Col>
                  </Row>
                  <br/>
+
                  <Row>
+
                      <Col md={{ span: 4, offset: 4 }}>
                          <Button disabled={loading} type = "submit">Submit Now</Button>
                      </Col>
