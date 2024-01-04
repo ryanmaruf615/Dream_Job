@@ -15,6 +15,7 @@ import ErrorMessage from "../ErrorMessage";
 
 
 const PostDetails = () => {
+    const history = useHistory()
     const {loading,error,agreementData} = useGetAgreement()
     const [comment, setComment] = useState("");
     const [review, setReview] = useState(0)
@@ -22,7 +23,7 @@ const PostDetails = () => {
     const [dataBySkill, setDataBySkill] = useState([]);
     const { id } = useParams();
     const apiUrl = `http://35.174.107.106:3000`;
-    const history = useHistory();
+
 
 
     useEffect(() => {
@@ -30,7 +31,7 @@ const PostDetails = () => {
             try {
                 const response = await axios.get(apiUrl+"/agreement/"+id).then(async function (dataById) {
                     setDataById(dataById.data);
-                    const response2 = await axios.get(apiUrl+"/agreement?skill="+dataById.data.skill);
+                    const response2 = await axios.get(apiUrl+"/agreement?row=100&skill="+dataById.data.skill);
                     setDataBySkill(response2.data);
                 });
 

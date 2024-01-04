@@ -11,9 +11,12 @@ import axios from "axios";
 import SuccessMessage from "../SuccessMessage";
 import ErrorMessage from '../ErrorMessage';
 import Loading from "../Loading";
+import {useHistory} from "react-router-dom";
 
 
 const CreateMasterAgreementForm = () => {
+
+
     const [selectedValue, setSelectedValue] = useState('');
     const [title, setJobTitle] = useState('');
     const [providerName, setProviderName] = useState('');
@@ -106,6 +109,7 @@ const CreateMasterAgreementForm = () => {
             // Set loading back to false, whether the request was successful or not
             setLoading(false);
         }
+
     }
 
     return (
