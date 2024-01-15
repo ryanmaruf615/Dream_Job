@@ -24,13 +24,13 @@ function App() {
           <Layout>
               <Switch>
                   <Route exact path="/" component={Home}/>
-                  <Route  exact path='/signup' component={Signup} />
-                  <Route  exact path='/login' component={Login} />
-                  <Route exact path='/dashbord/:skill' component={Dashboard} />
-                  <Route exact path='/masterAgrement' component={CreateMasterAgreementForm}/>
-                  <Route exact path='/marterialGroup' component={MaterialGroupForm} />
-                  <Route exact path='/postDetails/:id' component={PostDetails} />
-                  <Route exact path='/createprovider' component={CreateProvider} />
+                  <PublicRoute exact path='/signup' component={Signup} />
+                  <PublicRoute exact path='/login' component={Login} />
+                  <PrivateRoute exact path='/dashbord/:skill' component={Dashboard} />
+                  <PrivateRoute exact path='/masterAgrement' component={CreateMasterAgreementForm}/>
+                  <PrivateRoute exact path='/marterialGroup' component={MaterialGroupForm} />
+                  <PrivateRoute exact path='/postDetails/:id' component={PostDetails} />
+                  <PrivateRoute exact path='/createprovider' component={CreateProvider} />
                   <Route exact path='/aboutus' component={AboutUs} />
               </Switch>
           </Layout>

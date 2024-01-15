@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import TextInput from "../TextInput";
 import classes from '../../styles/Signup.module.css';
-import {Col, Form, Row} from "react-bootstrap";
+import {Col, Container, Form, Row} from "react-bootstrap";
 import Button from "../Button";
 import DatePicker from "react-datepicker";
 import { format } from 'date-fns';
@@ -80,15 +80,8 @@ const CreateProvider = () => {
         }
     }
 
-    const formatDate = (existSince) => {
-        const dateObject = new Date(existSince);
-        const setExistSince = existSince.toISOString().split('T')[0];
-        return existSince;
-    };
-
-
         return (
-            <div>
+            <Container>
                 <h1 className="text-center">Create A provider</h1>
                 <div className={classes.formContent}>
                     <Form className={classes.signup} onSubmit={handleSubmit}>
@@ -196,12 +189,14 @@ const CreateProvider = () => {
                             </Col>
                         </Row>
                         <Col md={{span: 4, offset: 4}}>
-                            <Button disabled={loading} type="submit">Submit Now</Button>
+                            {loading ? null : (
+                                <Button type="submit">Sign In</Button>
+                            )}
                         </Col>
 
                     </Form>
                 </div>
-            </div>
+            </Container>
         );
 }
 

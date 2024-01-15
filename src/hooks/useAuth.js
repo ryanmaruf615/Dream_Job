@@ -8,6 +8,7 @@ const useAuth = () => {
     const [user, setUser] = useState(localStorage.getItem('user'));
     const [error, setError] = useState(null);
     const [token, setToken] = useState(localStorage.getItem('authToken'));
+    const [loading,setLoading] = useState(false);
 
     // Function to log in and set user data
     const login = async (username, password) => {
@@ -19,6 +20,8 @@ const useAuth = () => {
                 // Store the token in localStorage and update the state
                 localStorage.setItem('authToken', authToken);
                 localStorage.setItem('user', response.data.user.username);
+
+                setLoading(true);
 
                 return response.data;
             })
@@ -43,7 +46,8 @@ const useAuth = () => {
         getUser,
         login,
         isAuthenticated,
-
+        error,
+        loading
     };
 };
 

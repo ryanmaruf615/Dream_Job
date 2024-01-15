@@ -87,9 +87,9 @@ const MaterialGroupForm = () => {
                         onChange={(e) => setPrice(e.target.value)}
                     />
                     <br />
-                    <Button disabled={loading} type="submit">
-                        Submit Now
-                    </Button>
+                    {loading ? null : (
+                        <Button type="submit">Sign In</Button>
+                    )}
                     {loading &&(<div ><Loading type="spokes" color="#00f7ff" height={'20%'} width={'20%'}/> </div>)}
                 </Form>
             </div>

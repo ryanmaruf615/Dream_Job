@@ -115,7 +115,9 @@ const PostDetails = () => {
                                     />
                                 </Col>
                                 <Col>
-                                    <Button disabled={loading} type = "submit">Submit</Button>
+                                    {loading ? null : (
+                                        <Button type="submit">Sign In</Button>
+                                    )}
                                 </Col>
 
                             </Row>

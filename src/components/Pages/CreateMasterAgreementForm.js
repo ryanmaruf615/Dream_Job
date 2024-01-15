@@ -6,12 +6,11 @@ import {Col, Container, FloatingLabel, Form, Row} from "react-bootstrap";
 import Button from "../Button";
 import DateTimePicker from "../DateTimePicker";
 import DatePicker from "react-datepicker";
-import TextArea from "../TextArea";
 import axios from "axios";
 import SuccessMessage from "../SuccessMessage";
 import ErrorMessage from '../ErrorMessage';
 import Loading from "../Loading";
-import {useHistory} from "react-router-dom";
+
 
 
 const CreateMasterAgreementForm = () => {
@@ -41,7 +40,6 @@ const CreateMasterAgreementForm = () => {
 
     // values for the select box
     const selectOptions = [
-
         { value: 'Networking Hardware', label: 'Networking Hardware' },
         { value: 'Computer Hardware', label: 'Computer Hardware' },
         { value: 'Software', label: 'Software' },
@@ -65,7 +63,6 @@ const CreateMasterAgreementForm = () => {
             skill:skill,
             teamMember:team,
             materialGroup:selectedValue,
-            //cycle:"1", //have to remove
             jobStartDate:jobStartDate,
             jobEndDate:jobEndDate,
             startContractDate:startContractDate,
@@ -277,17 +274,14 @@ const CreateMasterAgreementForm = () => {
                      </Col>
                  </Row>
                  <br/>
-
                  <Row>
-
                      <Col md={{ span: 4, offset: 4 }}>
-                         <Button disabled={loading} type = "submit">Submit Now</Button>
+                         {loading ? null : (
+                             <Button type="submit">Sign In</Button>
+                         )}
                      </Col>
-
                  </Row>
-
                 </Form>
-
         </Container>
         </>
     );

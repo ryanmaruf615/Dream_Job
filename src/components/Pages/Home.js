@@ -1,5 +1,4 @@
 import Posts from "../Posts";
-
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import TopCarousel from "../Carosel";
 import useAuth from '../../hooks/useAuth';
@@ -7,7 +6,6 @@ import useAuth from '../../hooks/useAuth';
 
 const Home = () => {
     const { user, isAuthenticated } = useAuth();
-
     return (
         <>
             {isAuthenticated() ? (
