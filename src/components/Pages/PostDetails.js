@@ -16,9 +16,9 @@ import ErrorMessage from "../ErrorMessage";
 
 const PostDetails = () => {
     const history = useHistory()
-    const {loading,error,agreementData} = useGetAgreement()
     const [comment, setComment] = useState("");
     const [review, setReview] = useState(0)
+    const [loading, setLoading] = useState(0)
     const [dataById, setDataById] = useState({});
     const [dataBySkill, setDataBySkill] = useState([]);
     const { id } = useParams();
@@ -43,115 +43,128 @@ const PostDetails = () => {
         fetchData();
     }, []);
 
- async function handleSubmit(e)
- {
-     e.preventDefault();
-     const formData = {
-         review:review, //have to remove
-         comment: comment,
-     }
-     try {
-         // Send a POST request using Axios
-         const response = await axios.post('http://35.174.107.106:3000/agreement/abir', formData, {
-             headers: {
-                 'Content-Type': 'application/json',
-             },
-         });
+    useEffect(() => {
+        const fetchData2 = async () => {
+            try {
+                    const response2 = await axios.get(apiUrl+"/agreement?row=100&skill="+dataById.data.skill);
+                    setDataBySkill(response2.data);
 
-         SuccessMessage({ title: 'Saved successfully' });
-         console.log(response.data);
+            } catch (error) {
+                console.error('Error fetching agreement data:', error);
+            }
+        };
 
-         // Reset the form and loading state after successful submission
-         setReview();
-         setComment('');
+        fetchData2();
+    }, []);
 
-     } catch (error) {
-         ErrorMessage();
-         console.error('Error submitting form:', error);
-     }
- }
+    async function handleSubmit(e)
+    {
+        e.preventDefault();
+        const formData = {
+            review:review,
+            comment: comment,
+        }
+        try {
+            // Send a POST request using Axios
+            const response = await axios.post(apiUrl+"/agreement/"+id+"/review", formData, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            SuccessMessage({ title: 'Saved successfully' });
+            console.log(response.data);
+
+            // Reset the form and loading state after successful submission
+            setReview('');
+            setComment('');
+
+        } catch (error) {
+            ErrorMessage();
+            console.error('Error submitting form:', error);
+        }
+    }
 
 
     return (
         <>
-        <Container>
-            <Row>
-                <Col sm={4}><Illustration src={signupImage}/></Col>
-                <Col sm={8}>
+            <Container>
+                <Row>
+                    <Col sm={4}><Illustration src={signupImage}/></Col>
+                    <Col sm={8}>
                         <h2>{dataById.title}</h2>
                         <p>{dataById.description}</p>
-                    <Row>
-                        <Col><p>Valid From : {printDate(dataById.jobStartDate)}</p></Col>
-                        <Col><p>Valid Till : {printDate(dataById.jobEndDate)}</p></Col>
-                        <Col><p>TeamDeadLine: {printDate(dataById.endContractDate)}</p></Col>
-                    </Row>
-                    <p>Skills : {dataById.skill}</p>
-                    <p>Materials: {dataById.materialGroup}</p>
-
-                    <Form onSubmit={handleSubmit}>
+                        <p>Role: {dataById.role}</p>
+                        <p>Skills : {dataById.skill}</p>
+                        <p>Materials: {dataById.materialGroup}</p>
                         <Row>
-                            <Col>
-                                <Rating style={{ maxWidth: 250 }} value={review} onChange={setReview}  />
-                            </Col>
-                            <Col xs={8}>
-                                <TextInput
-                                    type="text"
-                                    placeholder="Enter a review"
-                                    value={comment}
-                                    onChange={(e)=> setComment(e.target.value)}
-                                />
-                            </Col>
-                            <Col>
-                                <Button disabled={loading} type = "submit">Submit</Button>
-                            </Col>
-
+                            <Col><p>Valid From : {printDate(dataById.jobStartDate)}</p></Col>
+                            <Col><p>Valid Till : {printDate(dataById.jobEndDate)}</p></Col>
+                            <Col><p>TeamDeadLine: {printDate(dataById.endContractDate)}</p></Col>
                         </Row>
-                    </Form>
+                        <Form onSubmit={handleSubmit}>
+                            <Row>
+                                <Rating style={{ maxWidth: 300 }} value={review} onChange={setReview}  />
+                                
+                                <Col xs={8}>
+                                    <TextInput
+                                        type="text"
+                                        placeholder="Enter a review"
+                                        value={comment}
+                                        onChange={(e)=> setComment(e.target.value)}
+                                    />
+                                </Col>
+                                <Col>
+                                    <Button disabled={loading} type = "submit">Submit</Button>
+                                </Col>
+
+                            </Row>
+                        </Form>
 
                         <br/>
                         <p>Reviews: This is best provider</p>
 
-                </Col>
-            </Row>
+                    </Col>
+                </Row>
 
-            <div>
-                <h1 className="text-center"> Related Jobs </h1>
+                <div>
+                    <h1 className="text-center"> Related Jobs </h1>
 
-                <Table responsive="xl">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Title</th>
-                        <th>Role</th>
-                        <th>Skills</th>
-                        <th>Technology Level</th>
-                        <th>Salary</th>
-                        <th>cycle</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    {dataBySkill.map((job) => {
-
-                        return <tr key={job.id} onClick={() => {
-                            history.push("/postDetails/" + job.id);
-                            window.location.reload();
-                        }}>
-                            <td>{job.id}</td>
-                            <td>{job.title}</td>
-                            <td>{job.role}</td>
-                            <td>{job.skill}</td>
-                            <td>{job.technologyLevel}</td>
-                            <td>{job.salary}</td>
-                            <td>{job.cycle}</td>
+                    <Table responsive="xl">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Title</th>
+                            <th>Role</th>
+                            <th>Skills</th>
+                            <th>Technology Level</th>
+                            <th>Salary</th>
+                            <th>cycle</th>
                         </tr>
-                    })}
+                        </thead>
+                        <tbody>
+
+                        {dataBySkill.map((job) => {
+
+                            return <tr key={job.id} onClick={() => {
+                                history.push("/postDetails/" + job.id);
+                                window.location.reload();
+                            }}>
+                                <td>{job.id}</td>
+                                <td>{job.title}</td>
+                                <td>{job.role}</td>
+                                <td>{job.skill}</td>
+                                <td>{job.technologyLevel}</td>
+                                <td>{job.salary}</td>
+                                <td>{job.cycle}</td>
+                            </tr>
+                        })}
 
 
-                    </tbody>
-                </Table>
-            </div>
-        </Container>
+                        </tbody>
+                    </Table>
+                </div>
+            </Container>
 
         </>
     );

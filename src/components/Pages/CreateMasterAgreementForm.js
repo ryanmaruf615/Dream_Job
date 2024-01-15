@@ -144,7 +144,7 @@ const CreateMasterAgreementForm = () => {
                          <TextInput
                              required
                              type="text"
-                             placeholder="Enter Skill Level"
+                             placeholder="Enter Skills"
                              value={skill}
                              onChange={(e)=> setSkill(e.target.value)}
                          />

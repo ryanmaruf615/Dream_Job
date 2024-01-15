@@ -8,9 +8,11 @@ import Loading from "./Loading";
 
 
 export default function Posts(){
-
-
     const {loading,error,agreementData} = useGetAgreement()
+
+
+
+
     return(
         <div className={classes.posts}>
             {agreementData.length > 0 && agreementData.map((post) =>(
