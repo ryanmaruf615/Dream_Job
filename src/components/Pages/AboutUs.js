@@ -5,36 +5,39 @@ import classes from '../../styles/AboutUs.module.css';
 const teamMembers = [
     {
         id: 1,
-        name: 'Md Maruf',
-        role: 'Founder & CEO',
-        bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel turpis euismod, ',
+        name: 'Imon Bhuyan',
+        title: 'Director, Technical',
+        iD: 2024001,
+        contact: 'md.bhuiya@stud.fra-uas.de'
+    },
+    {
+        id: 2,
+        name: 'Md Maruf Hossain',
+        title: 'Director, Technical',
+        iD: '2024002',
+        contact: 'maruf.hossain@stud.fra-uas.de',
+    },
+    {
+        id: 3,
+        name: 'Mousumi Tonni',
+        title: 'Director, Marketing',
+        iD: '2024003',
+        contact: 'mousumi.tonny@stud.fra-uas.de',
+    },
+    {
+        id: 2,
+        name: 'Sadia Sabah',
+        title: 'Director, Brand',
+        iD: '2024004',
+        contact: 'aktari.sabah2@stud.fra-uas.de',
     },
     {
         id: 2,
         name: 'Jamal Uddin',
-        role: 'CTO',
-        bio: 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.',
+        title: 'Owner,Director, Operations ',
+        iD: '2024005',
+        contact: 'md.uddin2@stud.fra-uas.de',
     },
-    {
-        id: 3,
-        name: 'Tonni ',
-        role: 'CTO',
-        bio: '11 hajar euro.',
-    },
-    {
-        id: 4,
-        name: 'Sabah',
-        role: 'Artist',
-        bio: ' Sabah sundor manus.',
-    },
-    {
-        id: 5,
-        name: 'Imon',
-        role: 'CTO',
-        bio: 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.',
-    },
-
-    // Add more team members as needed
 ];
 
 const AboutUs = () => {
@@ -62,8 +65,9 @@ const AboutUs = () => {
                         <Card>
                             <Card.Body>
                                 <Card.Title>{member.name}</Card.Title>
-                                <Card.Subtitle className="mb-2 text-muted">{member.role}</Card.Subtitle>
-                                <Card.Text>{member.bio}</Card.Text>
+                                <Card.Subtitle >{member.title}</Card.Subtitle>
+                                <Card.Subtitle>{member.iD}</Card.Subtitle>
+                                <Card.Text>{member.contact}</Card.Text>
                             </Card.Body>
                         </Card>
                     </Col>

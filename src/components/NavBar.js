@@ -3,7 +3,9 @@ import {Link} from "react-router-dom";
 import logo from "../assets/images/logo1234.jpg";
 import Account from "./Account";
 
+
 function NavBar() {
+
     return (
         <>
             <nav className={classes.nav}>

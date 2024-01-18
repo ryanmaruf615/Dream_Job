@@ -5,7 +5,7 @@ import useAuth from '../hooks/useAuth';
 
 
 export default function Account(){
-    const { getUser, isAuthenticated } = useAuth();
+    const { userNameRes,getUser, isAuthenticated } = useAuth();
     const handleLogout = async () => {
         try {
              localStorage.clear();
