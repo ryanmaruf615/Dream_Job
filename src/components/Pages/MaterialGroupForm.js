@@ -31,7 +31,6 @@ const MaterialGroupForm = () => {
 
         // Set loading to true to indicate that the request is being sent
         setLoading(true);
-
         try {
             // Send a POST request using Axios
             const response = await axios.post('http://35.174.107.106:3000/materialGroup', formData, {
@@ -41,7 +40,6 @@ const MaterialGroupForm = () => {
             });
 
             // Handle the response here (you can log it or perform other actions)
-            console.log(response.data);
             SuccessMessage({ title: 'Saved successfully' });
             history.push("/");
 
