@@ -22,7 +22,7 @@ export default function Account(){
             {isAuthenticated() ? (
                     <>
                         <span className="material-icons-outlined" title="Account">account_circle</span>
-                        <span style = {{fontWeight: 'bold' , fontSize: '20px' }} >{getUser()}</span>
+                        <Link to="/" style = {{fontWeight: 'bold' , fontSize: '20px' }} >{getUser()}</Link>
                         <Link className={classes.button} to="/masterAgrement">Create Master Agreement</Link>
                         <Link className={classes.button} to="/marterialGroup">Create Material Group</Link>
                         <Link className={classes.button} to="/createprovider">Create Provider</Link>

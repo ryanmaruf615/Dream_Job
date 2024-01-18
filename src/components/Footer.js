@@ -1,11 +1,8 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import {useAuth} from "../AuthContex/AuthContex";
 import classes from "../styles/footer.module.css";
 
 const Footer = () => {
-    const {currentUser } = useAuth();
-
     return (
             <footer className={classes.footer}>
                 <Container className="text-light py-4">

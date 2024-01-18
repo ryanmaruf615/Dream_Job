@@ -1,10 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import signupImage from "../../assets/images/jobPost.png";
 import Illustration from "../Illustration";
-import TextInput from "../TextInput";
 import {Col, Container, Form, Row, Table} from "react-bootstrap";
-import useGetAgreement from "../../hooks/useGetAgreement";
-import {Link, useHistory, useParams} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import axios from "axios";
 import Button from "../Button";
 import { Rating } from '@smastrom/react-rating'
@@ -48,7 +46,6 @@ const PostDetails = () => {
             try {
                     const response2 = await axios.get(apiUrl+"/agreement?row=100&skill="+dataById.data.skill);
                     setDataBySkill(response2.data);
-
             } catch (error) {
                 console.error('Error fetching agreement data:', error);
             }
@@ -62,7 +59,7 @@ const PostDetails = () => {
         e.preventDefault();
         const formData = {
             review:review,
-            comment: comment,
+            comment:"good",
         }
         try {
             // Send a POST request using Axios
@@ -71,14 +68,7 @@ const PostDetails = () => {
                     'Content-Type': 'application/json',
                 },
             });
-
             SuccessMessage({ title: 'Saved successfully' });
-            console.log(response.data);
-
-            // Reset the form and loading state after successful submission
-            setReview('');
-            setComment('');
-
         } catch (error) {
             ErrorMessage();
             console.error('Error submitting form:', error);
@@ -105,31 +95,18 @@ const PostDetails = () => {
                         <Form onSubmit={handleSubmit}>
                             <Row>
                                 <Rating style={{ maxWidth: 300 }} value={review} onChange={setReview}  />
-                                
-                                <Col xs={8}>
-                                    <TextInput
-                                        type="text"
-                                        placeholder="Enter a review"
-                                        value={comment}
-                                        onChange={(e)=> setComment(e.target.value)}
-                                    />
-                                </Col>
-                                <Col>
+                                <Col className="mt-2">
                                     {loading ? null : (
-                                        <Button type="submit">Sign In</Button>
+                                        <Button  type="submit">Submit</Button>
                                     )}
                                 </Col>
-
                             </Row>
                         </Form>
-
                         <br/>
-                        <p>Reviews: This is best provider</p>
-
                     </Col>
                 </Row>
 
-                <div>
+                <div >
                     <h1 className="text-center"> Related Jobs </h1>
 
                     <Table responsive="xl">
@@ -148,9 +125,10 @@ const PostDetails = () => {
 
                         {dataBySkill.map((job) => {
 
-                            return <tr key={job.id} onClick={() => {
+                            return <tr className="table-row" key={job.id} onClick={() => {
                                 history.push("/postDetails/" + job.id);
                                 window.location.reload();
+
                             }}>
                                 <td>{job.id}</td>
                                 <td>{job.title}</td>

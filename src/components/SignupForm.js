@@ -1,14 +1,13 @@
-import {useState} from 'react';
-import {useHistory} from 'react-router-dom';
+import React, {useState} from 'react';
+import {Link, useHistory} from 'react-router-dom';
 import TextInput from "./TextInput";
 import CheckBox from "./CheckBox";
 import Button from "./Button";
 import Form from "./Form";
-
 import axios from "axios";
 import SuccessMessage from "./SuccessMessage";
 import ErrorMessage from "./ErrorMessage";
-import useAuth from '../hooks/useAuth'
+import Loading from "./Loading";
 
 const SignupForm = () => {
     const [username,setUsername] = useState("");
@@ -19,44 +18,9 @@ const SignupForm = () => {
     const [email,setEmail] = useState("");
     const [agree,setAgree] = useState("");
     const [error,setError] = useState();
-    const [loading,setLoading] = useState();
+    const [loading,setLoading] = useState(false);
     const [userData,setUserData] = useState([]);
-
-
     const history = useHistory()
-
-        // const {signup} =useAuth()
-
-        // async function handleSubmit(e){
-    //     e.preventDefault()
-    //     if(password !== confirmPassword){
-    //         return setError("Password don't Match");
-    //     }
-    //     try{
-    //         setError("");
-    //         setLoading(true)
-    //         await signup(email,password,username);
-    //         history.push("/");
-    //     }
-    //     catch (err) {
-    //         console.log(err);
-    //         setLoading(false);
-    //         setError("Failed to Signup")
-    //     }
-    //
-    // }
-
-
-        // const { login } = useAuth();
-        //
-        // const handleSubmit = async (e) => {
-        //     try {
-        //         const userData = await login('username', 'password');
-        //         console.log('Login successful', userData);
-        //     } catch (error) {
-        //         console.error('Login failed', error);
-        //     }
-        // };
 
     async function handleSubmitSignup(e) {
         e.preventDefault();
@@ -88,16 +52,7 @@ const SignupForm = () => {
             // Handle the response here (you can log it or perform other actions)
             SuccessMessage({ title: 'Saved successfully' });
             console.log("response",userData);
-
-            // Reset the form and loading state after successful submission
-            setFirstName('');
-            setLastName('');
-            setUsername('');
-            setPassword('');
-            setPassword('');
-            setConfirmPassword('');
-            setEmail('');
-            setAgree('');
+            history.push("/login");
         } catch (error) {
             // Handle errors here (e.g., show an error message)
             ErrorMessage();
@@ -170,14 +125,16 @@ const SignupForm = () => {
                 required
                 onChange={(e)=> setAgree(e.target.value)}
             />
+            {loading &&(<div ><Loading type="spokes" color="#00f7ff" height={'20%'} width={'20%'}/> </div>)}
 
-            <Button disabled={loading} type = "submit">
-                Submit Now
-            </Button>
+            {loading ? null : (
+                <Button type="submit">Submit</Button>
+            )}
+            {error && <p className="error">{error}</p>}
 
             {error && <p className="error">{error}</p>}
             <div className="info">
-                Already have an account? <a href="login.html">Login</a> instead.
+                Already have an account? <Link to="/login">Login</Link> instead.
             </div>
         </Form>
     );

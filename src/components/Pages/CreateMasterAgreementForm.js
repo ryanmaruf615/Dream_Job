@@ -10,6 +10,7 @@ import axios from "axios";
 import SuccessMessage from "../SuccessMessage";
 import ErrorMessage from '../ErrorMessage';
 import Loading from "../Loading";
+import {useHistory} from "react-router-dom";
 
 
 
@@ -37,6 +38,7 @@ const CreateMasterAgreementForm = () => {
     const [startContractDate, setStartContractDate] = useState(new Date());
     const [endContractDate, setEndContractDate] = useState(new Date());
     const today = new Date();
+    const history = useHistory()
 
     // values for the select box
     const selectOptions = [
@@ -81,24 +83,8 @@ const CreateMasterAgreementForm = () => {
 
             SuccessMessage({ title: 'Saved successfully' });
             console.log(response.data);
+            history.push("/");
 
-            // Reset the form and loading state after successful submission
-            setJobTitle('');
-            setPosition('');
-            setSkill('');
-            setProviderName('');
-            setProviderEmail('');
-            setTechnologyLevel('');
-            setRole('');
-            setTeam('');
-            setSelectedValue('');
-            setDescription('');
-            setSelectedValue('');
-            setSalary('');
-            setJobStartDate(new Date());
-            setEndDate(new Date());
-            setStartContractDate(new Date());
-            setEndContractDate(new Date());
         } catch (error) {
             ErrorMessage();
             console.error('Error submitting form:', error);
@@ -277,7 +263,7 @@ const CreateMasterAgreementForm = () => {
                  <Row>
                      <Col md={{ span: 4, offset: 4 }}>
                          {loading ? null : (
-                             <Button type="submit">Sign In</Button>
+                             <Button type="submit">Submit</Button>
                          )}
                      </Col>
                  </Row>

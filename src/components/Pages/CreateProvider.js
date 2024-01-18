@@ -11,6 +11,7 @@ import axios from "axios";
 import SuccessMessage from "../SuccessMessage";
 import ErrorMessage from '../ErrorMessage';
 import Loading from "../Loading";
+import {useHistory} from "react-router-dom";
 
 const CreateProvider = () => {
     const [name, setName] = useState("");
@@ -26,6 +27,7 @@ const CreateProvider = () => {
     const [validUntil, setValidUntil] = useState(new Date());
     const [loading, setLoading] = useState(false);
     const today = new Date();
+    const history = useHistory()
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -58,19 +60,7 @@ const CreateProvider = () => {
 
             SuccessMessage({ title: 'Saved successfully' });
             console.log(response.data);
-
-            // Reset the form and loading state after successful submission
-            setName('');
-            setAddress('');
-            setRole('');
-            setPhone('');
-            setEmail('');
-            setRule('');
-            setContactName('');
-            setMasterAgreementType('');
-            setExistSince(new Date());
-            setValidFrom(new Date());
-            setValidUntil(new Date());
+            history.push("/");
         } catch (error) {
             ErrorMessage();
             console.error('Error submitting form:', error);
@@ -190,7 +180,7 @@ const CreateProvider = () => {
                         </Row>
                         <Col md={{span: 4, offset: 4}}>
                             {loading ? null : (
-                                <Button type="submit">Sign In</Button>
+                                <Button type="submit">Submit</Button>
                             )}
                         </Col>
 

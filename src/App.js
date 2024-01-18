@@ -10,7 +10,6 @@ import PostDetails from "./components/Pages/PostDetails";
 import AboutUs from "./components/Pages/AboutUs";
 import CreateMasterAgreementForm from "./components/Pages/CreateMasterAgreementForm";
 import MaterialGroupForm from "./components/Pages/MaterialGroupForm";
-import {AuthProvider} from "./AuthContex/AuthContex";
 import CreateProvider from "./components/Pages/CreateProvider";
 import PrivateRoute from "./components/PrivateRoute";
 import PublicRoute from "./components/PublicRoute";
@@ -20,7 +19,6 @@ function App() {
   return (
       <>
       <Router>
-          <AuthProvider>
           <Layout>
               <Switch>
                   <Route exact path="/" component={Home}/>
@@ -34,7 +32,6 @@ function App() {
                   <Route exact path='/aboutus' component={AboutUs} />
               </Switch>
           </Layout>
-          </AuthProvider>
       </Router>
       </>
   );

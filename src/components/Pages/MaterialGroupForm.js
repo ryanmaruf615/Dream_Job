@@ -42,11 +42,8 @@ const MaterialGroupForm = () => {
             // Handle the response here (you can log it or perform other actions)
             console.log(response.data);
             SuccessMessage({ title: 'Saved successfully' });
-
-            // Reset the form and loading state after successful submission
-            setName('');
-            setDescription('');
-            setPrice('');
+            history.push("/");
+           
         } catch (error) {
             // Handle errors here (e.g., show an error message)
             ErrorMessage();
@@ -88,7 +85,7 @@ const MaterialGroupForm = () => {
                     />
                     <br />
                     {loading ? null : (
-                        <Button type="submit">Sign In</Button>
+                        <Button type="submit">Submit</Button>
                     )}
                     {loading &&(<div ><Loading type="spokes" color="#00f7ff" height={'20%'} width={'20%'}/> </div>)}
                 </Form>
