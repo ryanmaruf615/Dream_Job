@@ -7,6 +7,7 @@ import Button from '../Button';
 import SuccessMessage from '../SuccessMessage';
 import ErrorMessage from '../ErrorMessage';
 import Loading from "../Loading";
+import {useHistory} from "react-router-dom";
 
 
 
@@ -15,7 +16,7 @@ const MaterialGroupForm = () => {
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState();
     const [loading, setLoading] = useState(false);
-
+    const history = useHistory()
 
 
     async function handleSubmit(e) {
