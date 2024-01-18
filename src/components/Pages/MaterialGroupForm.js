@@ -43,7 +43,7 @@ const MaterialGroupForm = () => {
             console.log(response.data);
             SuccessMessage({ title: 'Saved successfully' });
             history.push("/");
-           
+
         } catch (error) {
             // Handle errors here (e.g., show an error message)
             ErrorMessage();
