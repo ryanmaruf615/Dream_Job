@@ -75,7 +75,7 @@ const CreateMasterAgreementForm = () => {
         setLoading(true);
         try {
             // Send a POST request using Axios
-            const response = await axios.post('http://35.174.107.106:3000/agreement', formData, {
+            const response = await axios.post('//35.174.107.106:3000/agreement', formData, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
