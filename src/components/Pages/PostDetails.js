@@ -20,7 +20,7 @@ const PostDetails = () => {
     const [dataById, setDataById] = useState({});
     const [dataBySkill, setDataBySkill] = useState([]);
     const { id } = useParams();
-    const apiUrl = `//35.174.107.106:3000`;
+    const apiUrl = `http://35.174.107.106:3000`;
 
 
 
