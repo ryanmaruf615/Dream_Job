@@ -52,7 +52,7 @@ const CreateProvider = () => {
 
         try {
             // Send a POST request using Axios
-            const response = await axios.post('http://35.174.107.106:3000/provider/create', formData, {
+            const response = await axios.post('https://dg4gi3uw0m2xs.cloudfront.net/provider/create', formData, {
                 headers: {
                     'Content-Type': 'application/json',
                 },

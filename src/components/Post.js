@@ -8,7 +8,7 @@ import {Rating} from "@smastrom/react-rating";
 
 export default function Post({ title, id, validFrom, validUntil, skill, teamMember }) {
     const [review, setReview] = useState(0);
-    const apiUrl = `http://35.174.107.106:3000`;
+    const apiUrl = `https://dg4gi3uw0m2xs.cloudfront.net`;
 
     useEffect(() => {
         const fetchData = async () => {

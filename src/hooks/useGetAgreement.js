@@ -5,7 +5,7 @@ export default function AgreementHook () {
     const [error,setError] = useState(true);
     const [loading,setLoading] = useState(false);
     const [agreementData, setAgreementData] = useState([]);
-    const apiUrl = '//35.174.107.106/agreement';
+    const apiUrl = 'https://dg4gi3uw0m2xs.cloudfront.net/agreement';
 
     useEffect(() => {
         const fetchData = async () => {
