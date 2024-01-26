@@ -68,3 +68,15 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+
+### Provider Management Component
+This platform helps providers apply for available candidates via currently open master agreements. The providers here are companies that can only access the platform after they have registered. The employee seeker company advertises the job based on their demands. The candidates will select an appropriate position from the announced job list.
+
+### Step 1: Sign Up /Login Page :
+Any provider interested in applying for master agreements should first register/Sign up and then log into the site. The Sign up page has a username, email, password, Role, Provider name and a category box with a submit button. As we all know, login works with email and username fields that require passwords.  We have utilized password-protected email forms here. 
+![Signup](https://github.com/ryanmaruf615/Dream_Job/assets/107250338/d6a89e9e-f2e0-482e-b39c-a46f50d1c93d)
+
+![log in](https://github.com/ryanmaruf615/Dream_Job/assets/107250338/07990fcf-080c-4ab2-ab34-bdae3328291a)
