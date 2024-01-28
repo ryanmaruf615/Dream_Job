@@ -1,4 +1,5 @@
 ### In the project directory, you can run:
+at first give command "npm install" to add all the required Node modules
 
 ### `npm start`
 
