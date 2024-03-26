@@ -1,0 +1,1368 @@
+{
+    "openapi": "3.0.0",
+    "paths": {
+        "/health-check": {
+            "get": {
+                "operationId": "HealthCheckController_checkAppHealth",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Provider Management API is healthy"
+                    }
+                },
+                "tags": [
+                    "health-check"
+                ]
+            }
+        },
+        "/agreement": {
+            "post": {
+                "operationId": "AgreementController_saveAgreement",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateAgreementDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AgreementModel"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "agreement"
+                ]
+            },
+            "get": {
+                "operationId": "AgreementController_getAgreementsBySalary",
+                "parameters": [
+                    {
+                        "name": "row",
+                        "required": false,
+                        "in": "query",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "skill",
+                        "required": false,
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AgreementModel"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "agreement"
+                ]
+            }
+        },
+        "/agreement/{id}": {
+            "get": {
+                "operationId": "AgreementController_getAgreementById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AgreementModel"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "agreement"
+                ]
+            }
+        },
+        "/agreement/update/{id}": {
+            "put": {
+                "operationId": "AgreementController_updateAgreementById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateAgreementDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AgreementModel"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "agreement"
+                ]
+            }
+        },
+        "/agreement/{id}/review": {
+            "post": {
+                "operationId": "AgreementController_giveReview",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GiveReviewDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ReviewModel"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "agreement"
+                ]
+            },
+            "get": {
+                "operationId": "AgreementController_getReview",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ReviewEntity"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "agreement"
+                ]
+            }
+        },
+        "/agreement/{id}/review/avg": {
+            "get": {
+                "operationId": "AgreementController_getAvg",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "number"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "agreement"
+                ]
+            }
+        },
+        "/offer/provider/{id}": {
+            "post": {
+                "operationId": "OfferController_create",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateOfferDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "offer"
+                ]
+            },
+            "get": {
+                "operationId": "OfferController_getOfferByProviderId",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "offer"
+                ]
+            }
+        },
+        "/offer/agreement/{id}": {
+            "get": {
+                "operationId": "OfferController_getAllOfferByAgreementId",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "offer"
+                ]
+            }
+        },
+        "/offer/{id}": {
+            "get": {
+                "operationId": "OfferController_getOfferById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "offer"
+                ]
+            }
+        },
+        "/offer/update/{id}": {
+            "put": {
+                "operationId": "OfferController_updateOfferById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateOfferDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OfferEntity"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "offer"
+                ]
+            }
+        },
+        "/materialGroup": {
+            "post": {
+                "operationId": "MaterialGroupController_create",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateMaterialGroupDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MaterialGroupModel"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "materialGroup"
+                ]
+            },
+            "get": {
+                "operationId": "MaterialGroupController_getAll",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "materialGroup"
+                ]
+            }
+        },
+        "/materialGroup/update/{id}": {
+            "put": {
+                "operationId": "MaterialGroupController_updateOfferById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateMaterialGroupDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MaterialGroupEntity"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "materialGroup"
+                ]
+            }
+        },
+        "/deal/offer/{id}": {
+            "post": {
+                "operationId": "DealController_create",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DealModel"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "deal"
+                ]
+            }
+        },
+        "/deal": {
+            "get": {
+                "operationId": "DealController_getAll",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "deal"
+                ]
+            }
+        },
+        "/deal/{id}/review": {
+            "patch": {
+                "operationId": "DealController_updateOfferById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateReviewDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DealEntity"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "deal"
+                ]
+            }
+        },
+        "/auth/signup": {
+            "post": {
+                "operationId": "AuthController_signup",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SignupDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "authentication"
+                ]
+            }
+        },
+        "/auth/signin": {
+            "post": {
+                "operationId": "AuthController_signin",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SigninDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "authentication"
+                ]
+            }
+        },
+        "/provider/create": {
+            "post": {
+                "operationId": "AuthProviderController_signup",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ProviderSignupDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProviderModel"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "provider"
+                ]
+            }
+        },
+        "/provider/{id}/review": {
+            "post": {
+                "operationId": "AuthProviderController_review",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateReviewDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProviderEntity"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "provider"
+                ]
+            }
+        },
+        "/provider/{id}": {
+            "get": {
+                "operationId": "AuthProviderController_get",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProviderEntity"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "provider"
+                ]
+            }
+        },
+        "/provider": {
+            "get": {
+                "operationId": "AuthProviderController_getProviders",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ProviderEntity"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "provider"
+                ]
+            }
+        }
+    },
+    "info": {
+        "title": "Provider-management-platform",
+        "description": "API to handle everything related to provider-management",
+        "version": "1.0",
+        "contact": {}
+    },
+    "tags": [],
+    "servers": [],
+    "components": {
+        "securitySchemes": {
+            "bearer": {
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+                "type": "http"
+            }
+        },
+        "schemas": {
+            "CreateAgreementDto": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string"
+                    },
+                    "position": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "salary": {
+                        "type": "string"
+                    },
+                    "providerName": {
+                        "type": "string"
+                    },
+                    "providerEmail": {
+                        "type": "string"
+                    },
+                    "technologyLevel": {
+                        "type": "string"
+                    },
+                    "role": {
+                        "type": "string"
+                    },
+                    "materialGroup": {
+                        "type": "string"
+                    },
+                    "teamMember": {
+                        "type": "string"
+                    },
+                    "skill": {
+                        "type": "string"
+                    },
+                    "jobStartDate": {
+                        "type": "string"
+                    },
+                    "jobEndDate": {
+                        "type": "string"
+                    },
+                    "startContractDate": {
+                        "type": "string"
+                    },
+                    "endContractDate": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "title",
+                    "position",
+                    "description",
+                    "salary",
+                    "providerName",
+                    "providerEmail",
+                    "technologyLevel",
+                    "role",
+                    "materialGroup",
+                    "teamMember",
+                    "skill",
+                    "jobStartDate",
+                    "jobEndDate",
+                    "startContractDate",
+                    "endContractDate"
+                ]
+            },
+            "AgreementModel": {
+                "type": "object",
+                "properties": {}
+            },
+            "GiveReviewDto": {
+                "type": "object",
+                "properties": {
+                    "review": {
+                        "type": "number",
+                        "minimum": 1,
+                        "maximum": 5
+                    },
+                    "comment": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "review",
+                    "comment"
+                ]
+            },
+            "ReviewModel": {
+                "type": "object",
+                "properties": {}
+            },
+            "ReviewEntity": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "agreementId": {
+                        "type": "number"
+                    },
+                    "review": {
+                        "type": "number"
+                    },
+                    "comment": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id",
+                    "agreementId",
+                    "createdAt",
+                    "updatedAt"
+                ]
+            },
+            "CreateOfferDto": {
+                "type": "object",
+                "properties": {
+                    "agreementId": {
+                        "type": "number"
+                    },
+                    "skills": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "experienceLevel": {
+                        "type": "string"
+                    },
+                    "salary": {
+                        "type": "string"
+                    },
+                    "category": {
+                        "type": "string"
+                    },
+                    "rule": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "agreementId",
+                    "skills",
+                    "experienceLevel",
+                    "salary",
+                    "category",
+                    "rule"
+                ]
+            },
+            "AgreementEntity": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "position": {
+                        "type": "string"
+                    },
+                    "providerName": {
+                        "type": "string"
+                    },
+                    "providerEmail": {
+                        "type": "string"
+                    },
+                    "skill": {
+                        "type": "string"
+                    },
+                    "salary": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "cycle": {
+                        "type": "string"
+                    },
+                    "materialGroup": {
+                        "type": "string"
+                    },
+                    "teamMember": {
+                        "type": "string"
+                    },
+                    "technologyLevel": {
+                        "type": "string"
+                    },
+                    "role": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "jobStartDate": {
+                        "type": "string"
+                    },
+                    "jobEndDate": {
+                        "type": "string"
+                    },
+                    "startContractDate": {
+                        "type": "string"
+                    },
+                    "review": {
+                        "type": "number"
+                    },
+                    "comment": {
+                        "type": "string"
+                    },
+                    "endContractDate": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "deal": {
+                        "$ref": "#/components/schemas/DealEntity"
+                    }
+                },
+                "required": [
+                    "id",
+                    "title",
+                    "position",
+                    "providerName",
+                    "providerEmail",
+                    "skill",
+                    "salary",
+                    "description",
+                    "cycle",
+                    "materialGroup",
+                    "teamMember",
+                    "technologyLevel",
+                    "role",
+                    "status",
+                    "jobStartDate",
+                    "jobEndDate",
+                    "startContractDate",
+                    "endContractDate",
+                    "createdAt",
+                    "updatedAt",
+                    "deal"
+                ]
+            },
+            "DealEntity": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "provider": {
+                        "$ref": "#/components/schemas/ProviderEntity"
+                    },
+                    "agreement": {
+                        "$ref": "#/components/schemas/AgreementEntity"
+                    },
+                    "offer": {
+                        "$ref": "#/components/schemas/OfferEntity"
+                    },
+                    "review": {
+                        "type": "number"
+                    },
+                    "createdAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id",
+                    "provider",
+                    "agreement",
+                    "offer",
+                    "review",
+                    "createdAt",
+                    "updatedAt"
+                ]
+            },
+            "OfferEntity": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "agreementId": {
+                        "type": "number"
+                    },
+                    "skills": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "experienceLevel": {
+                        "type": "string"
+                    },
+                    "salary": {
+                        "type": "string"
+                    },
+                    "category": {
+                        "type": "string"
+                    },
+                    "rule": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "provider": {
+                        "$ref": "#/components/schemas/ProviderEntity"
+                    },
+                    "deal": {
+                        "$ref": "#/components/schemas/DealEntity"
+                    }
+                },
+                "required": [
+                    "id",
+                    "agreementId",
+                    "skills",
+                    "experienceLevel",
+                    "salary",
+                    "category",
+                    "rule",
+                    "createdAt",
+                    "updatedAt",
+                    "provider",
+                    "deal"
+                ]
+            },
+            "ProviderEntity": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "address": {
+                        "type": "string"
+                    },
+                    "phone": {
+                        "type": "string"
+                    },
+                    "rule": {
+                        "type": "string"
+                    },
+                    "contactName": {
+                        "type": "string"
+                    },
+                    "role": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "existSince": {
+                        "type": "string"
+                    },
+                    "validFrom": {
+                        "type": "string"
+                    },
+                    "validUntil": {
+                        "type": "string"
+                    },
+                    "masterAgreementType": {
+                        "type": "string"
+                    },
+                    "review": {
+                        "type": "number"
+                    },
+                    "createdAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "offers": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/OfferEntity"
+                        }
+                    },
+                    "deal": {
+                        "$ref": "#/components/schemas/DealEntity"
+                    }
+                },
+                "required": [
+                    "id",
+                    "name",
+                    "address",
+                    "phone",
+                    "rule",
+                    "contactName",
+                    "role",
+                    "email",
+                    "existSince",
+                    "validFrom",
+                    "validUntil",
+                    "masterAgreementType",
+                    "review",
+                    "createdAt",
+                    "updatedAt",
+                    "offers",
+                    "deal"
+                ]
+            },
+            "CreateMaterialGroupDto": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "price": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "name",
+                    "description",
+                    "price"
+                ]
+            },
+            "MaterialGroupModel": {
+                "type": "object",
+                "properties": {}
+            },
+            "MaterialGroupEntity": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "price": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id",
+                    "name",
+                    "description",
+                    "price",
+                    "createdAt",
+                    "updatedAt"
+                ]
+            },
+            "DealModel": {
+                "type": "object",
+                "properties": {}
+            },
+            "UpdateReviewDto": {
+                "type": "object",
+                "properties": {
+                    "review": {
+                        "type": "number",
+                        "minimum": 1,
+                        "maximum": 5
+                    }
+                },
+                "required": [
+                    "review"
+                ]
+            },
+            "SignupDto": {
+                "type": "object",
+                "properties": {
+                    "firstName": {
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "firstName",
+                    "lastName",
+                    "email",
+                    "password"
+                ]
+            },
+            "SigninDto": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "email",
+                    "password"
+                ]
+            },
+            "ProviderSignupDto": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "address": {
+                        "type": "string"
+                    },
+                    "phone": {
+                        "type": "string"
+                    },
+                    "rule": {
+                        "type": "string"
+                    },
+                    "role": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "contactName": {
+                        "type": "string"
+                    },
+                    "masterAgreementType": {
+                        "type": "string"
+                    },
+                    "existSince": {
+                        "type": "string"
+                    },
+                    "validFrom": {
+                        "type": "string"
+                    },
+                    "validUntil": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "name",
+                    "address",
+                    "phone",
+                    "rule",
+                    "role",
+                    "email",
+                    "contactName",
+                    "masterAgreementType",
+                    "existSince",
+                    "validFrom",
+                    "validUntil"
+                ]
+            },
+            "ProviderModel": {
+                "type": "object",
+                "properties": {}
+            }
+        }
+    }
+}

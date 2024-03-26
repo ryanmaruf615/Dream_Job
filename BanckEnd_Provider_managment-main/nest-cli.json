@@ -1,0 +1,14 @@
+{
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "src",
+  "compilerOptions": {
+    "plugins": ["@nestjs/swagger"],
+    "assets": [
+      {
+        "include": "./cert",
+        "outDir": "dist/src/",
+        "watchAssets": true
+      }
+    ]
+  }
+}
